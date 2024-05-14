@@ -1,5 +1,9 @@
 # best-python
 
+The goal of this project is to provide a way to use the best-brainstorm Matlab solvers in Python, compatible with MNE-Python.
+
+For now, the project is using matlab.engine to call the best-brainstorm functions from Python, so you need to have Matlab installed on the computer.
+
 ## Entry point
 File is : [call_mem_with_mne_data.ipynb](call_mem_with_mne_data.ipynb)
 
