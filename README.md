@@ -1,12 +1,21 @@
 # best-python
 
+## Entry point
+File is : [call_mem_with_mne_data.ipynb](call_mem_with_mne_data.ipynb)
+
 ## Requirements
 - Python 3.6 or higher (with pip)
 - Matlab
 - Python "matlab.engine" module, compatible with the installed Matlab version
-- brainstorm3 [https://github.com/brainstorm-tools/brainstorm3](Github repo)
+- best-brainstorm ~~[Github repo](https://github.com/multifunkim/best-brainstorm)~~
+
+/!\ On May 14, 2024, the code is not compatible with the current version of best-brainstorm, please use the version provided in the link above.
+
+[Github repo](https://github.com/Edouard2laire/best-brainstorm/tree/wMEM) with the branch `wMEM` contains the compatible version of best-brainstorm.
+
+[Direct Download link](https://github.com/Edouard2laire/best-brainstorm/archive/refs/heads/wMEM.zip)
 
 ## Installation
-- Please make sure paths in the file are correct :
-    - To add paths,
-    - To import files
+- Please make sure that (look for "HERE" in the code):
+    - You have installed the correct matlab engine package version, depending on your installed Matlab software version
+    - Add the path to the best-brainstorm folder in the Matlab path
