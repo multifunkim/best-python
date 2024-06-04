@@ -46,25 +46,25 @@ function run_MEM(data, options_file)
     
     % try to start parralel port
     
-    % if isempty(gcp('nocreate'))
-    %     try
-    %         local_cluster = parcluster('Processes');
-    % 
-    %         % Modify the JobStorageLocation to $SLURM_TMPDIR
-    %         slurm_tmp_dir = fullfile('./', char(floor(26*rand(1, 10)) + 65));
-    %         if ~exist(slurm_tmp_dir)
-    %             mkdir(slurm_tmp_dir)
-    %         end
-    %         local_cluster.JobStorageLocation = slurm_tmp_dir;
-    %         disp(' MEM > Starting parpool')
-    % 
-    %         parpool(local_cluster,  16);
-    % 
-    %     catch
-    %         disp(' MEM > FAILED TO OPEN PARALLEL PORT ! THX CRAPPY perform')
-    %         OPTIONS.MEMpaneloptions.solver.parallel_matlab = 0;
-    %     end
-    % end
+    if isempty(gcp('nocreate'))
+        try
+            local_cluster = parcluster('Processes');
+
+            % Modify the JobStorageLocation to $SLURM_TMPDIR
+            slurm_tmp_dir = fullfile('./', char(floor(26*rand(1, 10)) + 65));
+            if ~exist(slurm_tmp_dir)
+                mkdir(slurm_tmp_dir)
+            end
+            local_cluster.JobStorageLocation = slurm_tmp_dir;
+            disp(' MEM > Starting parpool')
+
+            parpool(local_cluster,  16);
+
+        catch
+            disp(' MEM > FAILED TO OPEN PARALLEL PORT ! THX CRAPPY perform')
+            OPTIONS.MEMpaneloptions.solver.parallel_matlab = 0;
+        end
+    end
 
     % define the reconstruction FOV
     thresh_dis2cortex       = OPTIONS.thresh_dis2cortex / 100;

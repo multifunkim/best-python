@@ -21,3 +21,7 @@ C'est cette variable qu'on doit modifier pour racourcir le temps de calcul
 automatic : tout est généré
 
 pas besoin de donner de baseline si on donne la matrice de covariance
+
+La matrice de gain permet de donner les poids de chaque capteur pour chaque source
+Cette matrice de gain prend en compte la position et l'orientation des sources et des capteurs
+Donc si on donne la matrice de gain, on a pas besoin de donner la matrice source ("Grid")
