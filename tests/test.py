@@ -40,4 +40,3 @@ brain_cmem = stc.plot(
     hemi='both',
 )
 brain_cmem.add_text(0.1, 0.9, "cMEM", "title", font_size=14)
-show()
