@@ -4,8 +4,8 @@ import mne
 from mne.datasets import sample
 
 # Add the path to the src folder
-p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src')
-sys.path.append(p)
+# p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src')
+# sys.path.append(p)
 import best_python
 
 # Load data

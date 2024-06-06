@@ -3,3 +3,6 @@ sample_introduction/
 .venv/
 
 archives/
+dist/
+build/
+*.egg-info/
