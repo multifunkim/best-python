@@ -6,3 +6,4 @@ archives/
 dist/
 build/
 *.egg-info/
+how-to-upload.txt

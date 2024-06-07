@@ -2,13 +2,9 @@ import os
 import sys
 import mne
 from mne.datasets import sample
+import bestpython
 
-# Add the path to the src folder
-# p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src')
-# sys.path.append(p)
-import best_python
-
-# Load data
+# Load data from MNE
 data_path = sample.data_path()
 meg_path = data_path / "MEG" / "sample"
 fwd_fname = meg_path / "sample_audvis-meg-eeg-oct-6-fwd.fif"
@@ -27,16 +23,19 @@ forward = mne.convert_forward_solution(forward, force_fixed=True, surf_ori=True)
 
 ###############
 # Call solver
-matlab_wrapper = best_python.MatlabWrapper("C:/Users/Ilian/Documents/MATLAB/best-brainstorm")
+matlab_wrapper = bestpython.MatlabWrapper("C:/Users/Ilian/Documents/MATLAB/best-brainstorm")
 stc = matlab_wrapper.mem_solver(evoked, forward, noise_cov, depth=0.8, loose=0.0)
 ###############
 
 # Display results
 initial_time = -0.1
-brain_cmem = stc.plot(
+brain = mne.viz.plot_source_estimates(
+    stc,
+    subject='sample',
     subjects_dir=subjects_dir,
     initial_time=initial_time,
     smoothing_steps=7,
     hemi='both',
+    brain_kwargs={"block":True}
 )
-brain_cmem.add_text(0.1, 0.9, "cMEM", "title", font_size=14)
+brain.add_text(0.1, 0.9, "cMEM", "title", font_size=14)
