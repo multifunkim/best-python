@@ -50,4 +50,4 @@ stc = matlab_wrapper.mem_solver(evoked, forward, noise_cov, depth=0.8, loose=0.0
 ```
 
 ## Full example
-You can find a full example in the `tests/test.py` file [link](./tests/test.py).
+You can find a full example in the `tests/test.py` file [link](https://github.com/multifunkim/best-python/blob/main/tests/test.py).
