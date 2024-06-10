@@ -33,7 +33,7 @@ def _solver(eng, head_model, mem_options):
     # TODO : Extract the active set, do not create a np.ones array
     return ImageGridAmp_np, np.ones(len(head_model["vertex_connectivity"][1]), dtype=bool)
 
-def _mem_solver(eng, evoked, forward, noise_cov, loose=0.0, depth=0.8, PyMemOptions=None):
+def _mem_solver(eng, evoked, forward, noise_cov, PyMemOptions=None):
     """Call a custom solver on evoked data.
 
     This function does all the necessary computation:
@@ -60,15 +60,6 @@ def _mem_solver(eng, evoked, forward, noise_cov, loose=0.0, depth=0.8, PyMemOpti
         The head model, as returned by GetHeadModel.
     memOptions : dict
         The options for the MEM solver, as returned by GetMEMOptions.
-    loose : float in [0, 1] | 'auto'
-        Value that weights the source variances of the dipole components
-        that are parallel (tangential) to the cortical surface. If loose
-        is 0 then the solution is computed with fixed orientation.
-        If loose is 1, it corresponds to free orientations.
-        The default value ('auto') is set to 0.2 for surface-oriented source
-        space and set to 1.0 for volumic or discrete source space.
-    depth : None | float in [0, 1]
-        Depth weighting coefficients. If None, no depth weighting is performed.
 
     Returns
     -------
@@ -99,26 +90,17 @@ def _mem_solver(eng, evoked, forward, noise_cov, loose=0.0, depth=0.8, PyMemOpti
         evoked.info,
         noise_cov,
         pca=False,
-        depth=depth,
-        loose=loose,
+        depth=None,
+        loose=0,
         weights=None,
         weights_min=None,
         rank=None,
     )
 
-    # Select channels of interest 
-    channel_names = forward['sol']['row_names']
-    # indices_meg = [i for i, name in enumerate(channel_names) if name.startswith('MEG')]
-    # indices_meg.pop()
-    # gain = gain[indices_meg, :]
-
     # Select channels of interest
     sel = [all_ch_names.index(name) for name in gain_info["ch_names"]]
     M = evoked.data[sel]
 
-    # data_type = ["MEG"]
-    # channel_types = [name.split(" ")[0] for name in channel_names]
-    
     ####### SOLVER
     vertex_connectivity_matrix = mne.spatial_src_adjacency(forward['src'])
 
@@ -128,7 +110,6 @@ def _mem_solver(eng, evoked, forward, noise_cov, loose=0.0, depth=0.8, PyMemOpti
     mem_options = GetMEMOptions(default_cmem_pipeline_options, M, evoked.times, noise_cov, PyMemOptions)
 
     X, active_set = _solver(eng, head_model, mem_options)
-    # X = _reapply_source_weighting(X, source_weighting, active_set)
 
     stc = _make_sparse_stc(
         X, active_set, forward, tmin=evoked.times[0], tstep=1.0 / evoked.info["sfreq"]

@@ -1,4 +1,30 @@
 class MEMOptions():
+    """
+    Options for configuring MEM (Maximum Entropy on the Mean) processing pipeline.
+    
+    Parameters
+    ----------
+    data_modality : str, optional
+        Modality of the data, e.g., 'MEG' or 'EEG'. Default is None.
+    pipeline : str, optional
+        Selected pipeline, one of 'cMEM', 'wMEM', or 'rMEM'. Default is 'cMEM'.
+    noise_cov : float matrix, optional
+        Noise covariance matrix. Default is an empty list.
+    noise_cov_recompute : bool, optional
+        If True, noise covariance is recomputed. If False, a noise covariance matrix must be given. Default is True.
+    active_mean_method : int, optional
+        Method for computing the active mean. Default is 2.
+    alpha_method : int, optional
+        Method for computing alpha. Default is 3.
+    alpha_threshold : float, optional
+        Threshold for alpha. Default is 0.
+    initial_lambda : float, optional
+        Initial value of lambda. Default is 1.
+    depth_weigth_MNE : float, optional
+        Depth weight for MNE. Default is 0.
+    depth_weigth_MEM : float, optional
+        Depth weight for MEM. Default is 0.
+    """
     
     def __init__(self, *args, **kwargs):
         # If data contains MEG or EEG data

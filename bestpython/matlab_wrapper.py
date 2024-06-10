@@ -6,5 +6,5 @@ class MatlabWrapper():
         self.eng = matlab.engine.start_matlab("-desktop")
         self.eng.eval(f"addpath(genpath('{matlab_path}'))", nargout=0)
         
-    def mem_solver(self, evoked, forward, noise_cov, loose=0.0, depth=0.8, MEMOptions=None):
-        return _mem_solver(self.eng, evoked, forward, noise_cov, loose, depth, MEMOptions)
+    def mem_solver(self, evoked, forward, noise_cov, MEMOptions=None):
+        return _mem_solver(self.eng, evoked, forward, noise_cov, MEMOptions)

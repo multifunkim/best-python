@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="bestpython",
-    version="0.0.4",
+    version="0.0.5",
     author="MultiFunkIm Lab",
     author_email="ilian@iazz.fr",
     description="A python wrapper for the MEM source method",
