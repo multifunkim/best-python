@@ -4,7 +4,7 @@ class MEMOptions():
     
     Parameters
     ----------
-    data_modality : str, optional
+    data_modality : str
         Modality of the data, e.g., 'MEG' or 'EEG'. Default is None.
     pipeline : str, optional
         Selected pipeline, one of 'cMEM', 'wMEM', or 'rMEM'. Default is 'cMEM'.
@@ -24,6 +24,10 @@ class MEMOptions():
         Depth weight for MNE. Default is 0.
     depth_weigth_MEM : float, optional
         Depth weight for MEM. Default is 0.
+    baseline_time : [float, float]
+        Slot time used to define the baseline, baseline_time[0] < baseline_time[1]
+    time_segment : [float, float]
+        Slot time within the algorithm will run, time_segment[0] < time_segment[1]
     """
     
     def __init__(self, *args, **kwargs):
@@ -45,6 +49,10 @@ class MEMOptions():
         self.depth_weigth_MNE = 0
         self.depth_weigth_MEM = 0
         
+        # Baseline and time segment
+        self.time_segment = None
+        self.baseline_time = None
+        
         for key, value in kwargs.items():
             setattr(self, key, value)
         
@@ -62,5 +70,23 @@ class MEMOptions():
 
         if self.noise_cov == [] and self.noise_cov_recompute is False:
             errors.append("If noise_cov_recompute defined to false, noise_cov can't be empty")
-            
+           
+        # Timeline segment 
+        if self.time_segment is None:
+            errors.append("time_segment can't be None")
+        else:
+            if len(self.time_segment) != 2:
+                errors.append("time_segment must be a list containing 2 floats")
+            elif self.time_segment[0] > self.time_segment[1]:
+                errors.append("time_segment[0] must less or equals than time_segment[1]")
+        
+        # Baseline segment 
+        if self.baseline_time is None:
+            errors.append("baseline_time can't be None")
+        else:
+            if len(self.baseline_time) != 2:
+                errors.append("baseline_time must be a list containing 2 floats")
+            elif self.baseline_time[0] > self.baseline_time[1]:
+                errors.append("baseline_time[0] must less or equals than baseline_time[1]")
+        
         return errors

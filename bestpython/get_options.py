@@ -60,9 +60,10 @@ def GetMEMOptions(default_pipeline, M, DataTimes, NoiseCov, PyMemOptions):
     MEMOptions["optional"]["DataFile"] = ""
     MEMOptions["optional"]["HeadModelFile"] = ""
     # NoiseCov can be empty if Baseline is defined
-    MEMOptions["optional"]["Baseline"] = matlab.double(M[:,:10].tolist())
-    MEMOptions["optional"]["BaselineTime"] = matlab.double([DataTimes[0], DataTimes[10]])
-    MEMOptions["optional"]["TimeSegment"] = matlab.double([DataTimes[0], DataTimes[10]])
+    MEMOptions["optional"]["BaselineHistory"] = ["within"],
+    # MEMOptions["optional"]["Baseline"] = matlab.double(M[:,:10].tolist())
+    MEMOptions["optional"]["BaselineTime"] = matlab.double(PyMemOptions.baseline_time)
+    MEMOptions["optional"]["TimeSegment"] = matlab.double(PyMemOptions.time_segment)
     MEMOptions["optional"]["Channel"] = []
     MEMOptions["optional"]["ChannelFlag"] = []
 

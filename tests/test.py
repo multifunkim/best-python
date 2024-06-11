@@ -24,7 +24,11 @@ forward = mne.convert_forward_solution(forward, force_fixed=True, surf_ori=True)
 ###############
 # Call solver
 matlab_wrapper = bestpython.MatlabWrapper("C:/Users/Ilian/Documents/MATLAB/best-brainstorm")
-mem_options = bestpython.MEMOptions(data_modality="MEG")
+mem_options = bestpython.MEMOptions(
+    data_modality="MEG",
+    time_segment = [0.04, 0.18],
+    baseline_time = [0.04, 0.1]
+)
 stc = matlab_wrapper.mem_solver(evoked, forward, noise_cov, MEMOptions=mem_options)
 ###############
 
