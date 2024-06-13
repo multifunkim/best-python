@@ -39,14 +39,22 @@ You can download the best-brainstorm toolbox from the [best-brainstorm github](h
 ## Usage
 You can use the functions from the best-python package like this:
 ```python
-import best_python
+import bestpython
 
 # Create a new instance of the wrapper
 # You need to provide the path to the best-brainstorm root folder
-matlab_wrapper = best_python.MatlabWrapper("C:/PATH/OF/BEST-BRAINSTORM/ROOT/FOLDER")
+matlab_wrapper = bestpython.MatlabWrapper("C:/PATH/OF/BEST-BRAINSTORM/ROOT/FOLDER")
+
+# Define the mandatory options
+mem_options = bestpython.MEMOptions(
+    data_modality="MEG",
+    time_segment = [0.04, 0.18],
+    baseline_time = [0.04, 0.1]
+)
 
 # Call the solver
-stc = matlab_wrapper.mem_solver(evoked, forward, noise_cov, depth=0.8, loose=0.0)
+stc = matlab_wrapper.mem_solver(evoked, forward, noise_cov, MEMOptions=mem_options)
+
 ```
 
 ## Full example
