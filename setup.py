@@ -26,5 +26,10 @@ setup(
     ],
     extras_require={
         'matlab': []
-    }
+    },
+    project_urls={
+        'Homepage': 'https://github.com/multifunkim/best-python',
+        'Bug Reports': 'https://github.com/multifunkim/best-python/issues',
+        'Source': 'https://github.com/multifunkim/best-python',
+    },    
 )
