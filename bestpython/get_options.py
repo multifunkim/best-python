@@ -80,4 +80,8 @@ def GetMEMOptions(default_pipeline, M, DataTimes, NoiseCov, PyMemOptions):
     MEMOptions["optional"]["depth_weigth_MNE"] = PyMemOptions.depth_weigth_MNE
     MEMOptions["optional"]["depth_weigth_MEM"] = PyMemOptions.depth_weigth_MEM
 
+    # Specify the output form
+    MEMOptions["output"] = {} 
+    MEMOptions["output"]["save_factor"] = 0
+
     return MEMOptions
